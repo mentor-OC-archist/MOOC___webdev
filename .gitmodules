@@ -1,0 +1,12 @@
+[submodule "0_ENV"]
+	path = 0_ENV
+	url = git@github.com:achicyr/0_ENV.git
+[submodule "1__HTML"]
+	path = 1__HTML
+	url = git@github.com:achicyr/1__HTML.git
+[submodule "2__CSS"]
+	path = 2__CSS
+	url = git@github.com:achicyr/2__CSS.git
+[submodule "3__JavaScript"]
+	path = 3__JavaScript
+	url = git@github.com:achicyr/3__JavaScript.git
