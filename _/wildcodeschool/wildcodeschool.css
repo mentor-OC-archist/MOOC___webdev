@@ -1,0 +1,19 @@
+/* In order to validate your CSS code, click on the arrow at the top right of this window. Don't forget, you can have a look here : https://blog.codepen.io/2017/10/11/analyze-css-now-using-stylelint/ 
+ */
+
+/* Your CSS code here */
+body{margin:0;padding-top: 5em;}
+ul{list-style:none;}
+h1,h2,h3,header ul li{font-family:"Amatic SC"}
+body>header{position: fixed;    top: 0;    left: 0;    width: 100%;
+    display:flex;justify-content:space-between;border-bottom:solid;background: whitesmoke}
+header a{text-decoration:none;}
+/*body>header>nav{float:right;order:1;}*/ 
+nav ul{display:flex;    padding: 0;    margin: 0;    height: 100%;    line-height: 4rem;}
+nav ul li{padding: 0 3em; transition: font-size .5s;}
+nav ul li:hover{padding: 0 3em;}
+
+section>h2{text-align:center;text-decoration:underline;}
+#perfs>ul{display:flex;}
+
+#prices p>span{color:red;}

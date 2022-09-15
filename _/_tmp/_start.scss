@@ -1,0 +1,153 @@
+@use "sass:map";
+@import "./scss/main.scss";
+
+
+
+
+
+/*
+// BEM: Block-Element-Modifier 
+// système 7-1: Type de codebase optimal pour le codage en sass (scss)
+
+
+  CSS ETAPE 7:
+    IL EST POSSIBLE DE SE SIMPLIFIER LA VIE DANS LA NOMENCLATURE DES SOUS-COMPOSANTS
+    EN EFFET, ON PEUT SE PASSER D'UTILISER L'ESPERLUETTE DANS LES SOUS COMPOSANT
+
+*/
+
+@keyframes menuPageAnimation{
+0%{height:0px;opacity:0;}
+90%{height: 500px;opacity:1;}
+100%{height:auto;opacity:1;overflow:visible;}
+}
+
+
+main>article{}
+
+/******************************************************************************************/
+/**BLOCK .SECTION**************************************************************************/
+$section: (name: "section");
+@function section($_section:$section){
+  // ..do stuff 
+  //...and @if $_section exists, merge it into $section before sending it back
+  //...and @if it doesn't, apply your conditions on $section
+  @if $_section != $section {
+      $section: map.merge($section, $_section);
+      // ..and maybe do other stuff. you can: 
+      // - forbidden value types, 
+      // - bound values, 
+      // - darknessing or lightnessing colors, 
+      // - etc...
+      // @if map-has-key($_section, 'name'){$section: map.set($section, "name", map.get($_section, "name")) + "modifying name property by adding string to it for example...";}
+      // @if map-has-key($_section, 'padding'){}
+      // @if map-has-key($_section, 'some_custom_values'){}
+      // ....
+  }
+}
+%section{
+  &__titre{
+    text-transform: uppercase;
+    margin-bottom:3rem;
+    @extend %titre1--s;
+    @extend %rel;
+  
+    @extend %titres;
+    @extend %fontB;
+    &.--menu{
+      @extend %titre-menu;    
+    }
+    &.--underline/*,&--underline*/{
+      @extend .before__titles--underline;
+    }
+  }
+  &__list{
+    height:0;
+    animation: menuPageAnimation 1s ease-in 1s 1 forwards;
+    overflow:hidden;
+    margin-bottom: 5rem;
+  
+  
+    @include blockList-0__list();
+    // @include blockList-0__list--liAnimation-0;
+    @include blockList-0__list--liAnimation-1;
+  }
+  &__button{
+    @include jumbotron__explorerButton;
+  }
+}
+@mixin section(){
+  @extend %section;
+  &__titre{@extend %section__titre;}
+  &__list{@extend %section__list;}
+  &__button{@extend %section__button;}
+}
+%_section{
+    @extend %section;
+    >.__titre{@extend %section__titre;}
+    >.__list{@extend %section__list;}
+    >.__button{@extend %section__button;}
+}
+@mixin _section(){
+  @extend %_section;
+  >.__titre{}
+  >.__list{}
+  >.__button{}
+}
+.section{@include section();}
+
+
+/******************************************************************************************/
+/******************************************************************************************/
+/**BLOCK EXEMPLE***************************************************************************/
+$exemple: (name: 'exemple', sub: 'list'); // a map conaining at least a 'name' key, in case of use as an subcomponent
+@function exemple($_exemple: $exemple){
+// ..do stuff 
+//...and @if $_exemple exists, merge it into $exemple before sending it back
+//...and @if it doesn't, apply your conditions on $exemple
+@if $_exemple != $exemple {
+    $exemple: map.merge($exemple, $_exemple);
+    // ..and maybe do other stuff. you can: 
+    // - forbidden value types, 
+    // - bound values, 
+    // - darknessing or lightnessing colors, 
+    // - etc...
+    // @if map-has-key($_exemple, 'name'){$exemple: map.set($exemple, "name", map.get($_exemple, "name")) + "modifying name property by adding string to it for example...";}
+    // @if map-has-key($_exemple, 'padding'){}
+    // @if map-has-key($_exemple, 'some_custom_values'){}
+    // ....
+}
+@return $exemple;
+}
+@mixin exemple($exemple: exemple()){
+  @extend %exemple;
+  &__titre{@extend %exemple__titre;}
+  &__section{@extend %exemple__section;}
+}
+%exemple{
+  padding: 2rem 1rem;
+  border-radius: 3rem 3rem 0 0;
+  background: white;
+  position: relative;
+  background: whitesmoke;
+  &__titre{
+    padding-right: 5%;
+    margin-block-end: 4rem;
+    @extend %titre-menu;    
+    a.coeur{text-decoration: none;
+      @extend %floatR;
+      @include pseudo-classes(btn-coeur(🤍,🧡), "before");
+    }
+  }
+  &__section{
+    @if map-get($exemple, "sub"){
+      // .#{map-get($exemple, "sub")}{
+      //   @include section;
+      // }
+      &.#{map-get($exemple, "sub")}{
+        @include _section;
+      }
+    }
+  }
+}
+.exemple{@include exemple();}

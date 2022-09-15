@@ -1,0 +1,10 @@
+header {
+    border-bottom: solid;
+}
+header>img{border:1px solid black;}
+header>menu{float:right;list-style:none;}
+header>menu>li{}
+header>menu>li>a{color:blue}
+header>menu>li>a:hover{color:silver;}
+header>menu>li>a:hover{color:silver;}
+
